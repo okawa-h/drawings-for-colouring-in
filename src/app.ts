@@ -1,7 +1,7 @@
 import {DrawingColouring} from './drawingColouring';
 
-var jBoard = <HTMLDivElement> document.getElementById('board');
-var drawingColouring = new DrawingColouring(jBoard);
+let jBoard = <HTMLDivElement> document.getElementById('board');
+let drawingColouring = new DrawingColouring(jBoard);
 
 window.addEventListener('resize',onResize);
 

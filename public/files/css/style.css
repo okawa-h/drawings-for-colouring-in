@@ -11,8 +11,6 @@
 #board {
 	display: inline-block;
 	position: relative;
-	width: 800px;
-	height: 570px;
 	margin-bottom: 30px;
 	border: 2px solid #eee;
 }
@@ -42,16 +40,23 @@
 
 #color-palette li {
 	display: inline-block;
-	width: 30px;
-	height: 30px;
+	position: relative;
+	width: 25px;
+	height: 25px;
 	margin: 0 2px;
-	border: 3px solid transparent;
-	border-radius: 6px;
+	border: 2px solid transparent;
+	border-radius: 50%;
 	box-sizing: border-box;
 	cursor: pointer;
+	transition: all .15s ease-in-out;
+}
+
+#color-palette li[data-color="#ffffff"] {
+	border-color: #333;
 }
 
 #color-palette li.active {
+	top: -.2em;
 	border-color: #bbb;
 }
 
@@ -68,7 +73,7 @@
 
 #size {
 	width: 4em;
-	padding: .6em 1em;
+	padding: .7em 1em;
 	border: none;
 	border-radius: 3px;
 	background-color: #eee;
@@ -76,7 +81,7 @@
 }
 
 #eraser {
-	padding: .6em 1em;
+	padding: .7em 1em;
 	background-color: #eee;
 	cursor: pointer;
 }
@@ -87,13 +92,13 @@
 }
 
 #clear {
-	padding: .6em 1em;
+	padding: .7em 1em;
 	background-color: #eee;
 	cursor: pointer;
 }
 
 #download {
-	padding: .6em 1em;
+	padding: .7em 1em;
 	background-color: #eee;
 	cursor: pointer;
 }

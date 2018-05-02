@@ -10,7 +10,7 @@ export class DrawingColouring {
 	private jSize          :HTMLInputElement;
 	private drawingCanvas  :DrawingCanvas;
 	private BASE_IMAGE_PATH:string = 'files/img/base.jpg';
-	private COLOR_LIST     :Array<string> = ['#000000','#0000ff','#00ffff','#00ff00','#990000','#ffff00'];
+	private COLOR_LIST     :Array<string> = ['#f44336','#E91E63','#9C27B0','#673AB7','#3F51B5','#2196F3','#03A9F4','#00BCD4','#009688','#4CAF50','#8BC34A','#CDDC39','#FFEB3B','#FFC107','#FF9800','#FF5722','#795548','#9E9E9E','#607D8B','#000000','#ffffff'];
 
 	constructor(jBoard:HTMLDivElement) {
 
@@ -37,7 +37,7 @@ export class DrawingColouring {
 		this.jPalette.addEventListener('click',event => this.onChangeColor(event));
 		this.jTools.addEventListener('click',event => this.onClickTool(event));
 
-		var list = <HTMLLIElement> this.jPalette.children.item(0);
+		let list = <HTMLLIElement> this.jPalette.children.item(0);
 		list.click();
 
 	}
@@ -45,7 +45,7 @@ export class DrawingColouring {
 	private onClickTool(event:any):void {
 
 		let target =<HTMLLIElement> event.target;
-		let tool  =<string> target.getAttribute('data-tool');
+		let tool   =<string> target.getAttribute('data-tool');
 		event.preventDefault();
 		if (tool == null) return;
 
@@ -69,7 +69,7 @@ export class DrawingColouring {
 
 	private onSize(event:any):void {
 
-		var value:number = Number(this.jSize.value);
+		let value:number = Number(this.jSize.value);
 		this.drawingCanvas.setSize(value);
 
 	}
@@ -94,9 +94,9 @@ export class DrawingColouring {
 
 	private onDownload():void {
 
-		var data  :string             = this.drawingCanvas.getData();
-		var canvas:HTMLCanvasElement  = document.createElement('canvas');
-		var ctx      = <CanvasRenderingContext2D>canvas.getContext('2d');
+		let data  :string             = this.drawingCanvas.getData();
+		let canvas:HTMLCanvasElement  = document.createElement('canvas');
+		let ctx      = <CanvasRenderingContext2D>canvas.getContext('2d');
 
 		canvas.width  = this.jBoard.clientWidth;
 		canvas.height = this.jBoard.clientHeight;
@@ -120,11 +120,11 @@ export class DrawingColouring {
 		let color  =<string> target.getAttribute('data-color');
 		event.preventDefault();
 		if (color != null) this.drawingCanvas.setColor(color);
-		var items:HTMLCollection = this.jPalette.children;
+		let items:HTMLCollection = this.jPalette.children;
 
-		for (var i = 0; i < items.length; ++i) {
-			var item = items.item(i);
-			var name = color == item.getAttribute('data-color') ? 'active':'';
+		for (let i = 0; i < items.length; ++i) {
+			let item = items.item(i);
+			let name = color == item.getAttribute('data-color') ? 'active':'';
 			item.className = name;
 		}
 
@@ -132,13 +132,15 @@ export class DrawingColouring {
 
 	private start():void {
 
-		this.setSize();
-
-		var canvas = this.jBaseCanvas;
-		var ctx = <CanvasRenderingContext2D>canvas.getContext('2d');
+		let canvas = this.jBaseCanvas;
+		let ctx = <CanvasRenderingContext2D>canvas.getContext('2d');
 		DrawingColouring.loadImage(this.BASE_IMAGE_PATH,image => {
 
-			var scale = canvas.width / image.width;
+			this.jBoard.style.width  = String(image.width)  + 'px';
+			this.jBoard.style.height = String(image.height) + 'px';
+			this.setSize();
+
+			let scale = canvas.width / image.width;
 			ctx.setTransform(scale, 0, 0, scale, 0, 0);
 			ctx.drawImage(image, 0, 0);
 
@@ -159,16 +161,14 @@ export class DrawingColouring {
 
 	private setSize():void {
 
-		var width :number = this.jBoard.clientWidth;
-		var height:number = this.jBoard.clientHeight;
-		this.jBaseCanvas.width  = this.jColorCanvas.width  = width;
-		this.jBaseCanvas.height = this.jColorCanvas.height = height; 
+		this.jBaseCanvas.width  = this.jColorCanvas.width  = this.jBoard.clientWidth;
+		this.jBaseCanvas.height = this.jColorCanvas.height = this.jBoard.clientHeight; 
 
 	}
 
 	private static download(data:string,name:string):void {
 
-		var link:HTMLAnchorElement = document.createElement('a');
+		let link:HTMLAnchorElement = document.createElement('a');
 		link.href      = data;
 		link.download  = name;
 		link.innerText = 'download';
@@ -178,7 +178,7 @@ export class DrawingColouring {
 
 	private static loadImage(data:string,callback:(image:HTMLImageElement)=>void):void {
 
-		var image:HTMLImageElement = new Image();
+		let image:HTMLImageElement = new Image();
 		image.onload = event => callback(image);
 		image.src    = data;
 

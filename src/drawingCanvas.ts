@@ -12,6 +12,7 @@ export class DrawingCanvas {
 
 	private DRAW_SIZE :number = 3;
 	private DRAW_COLOR:string = '#000000';
+	private DRAW_ALPHA:number = .9;
 
 	constructor(jCanvas:HTMLCanvasElement) {
 
@@ -19,8 +20,8 @@ export class DrawingCanvas {
 		this.ctx     = <CanvasRenderingContext2D> this.jCanvas.getContext('2d');
 		this.finger = [];
 
-		var finger = this.finger;
-		for (var i=0; i<10; i++) {
+		let finger = this.finger;
+		for (let i=0; i<10; i++) {
 			finger[i] = { x:0,y:0,x1:0,y1:0 };
 		}
 
@@ -37,9 +38,9 @@ export class DrawingCanvas {
 	private onMousedown(event:any):void {
 
 		if (event.button === 0) {
-			var rect = event.target.getBoundingClientRect();
-			var x = ~~(event.clientX - rect.left);
-			var y = ~~(event.clientY - rect.top);
+			let rect = event.target.getBoundingClientRect();
+			let x = ~~(event.clientX - rect.left);
+			let y = ~~(event.clientY - rect.top);
 			this.mouseDraw(x,y);
 		}
 
@@ -48,9 +49,9 @@ export class DrawingCanvas {
 	private onMousemove(event:any):void {
 
 		if (event.buttons === 1 || event.witch === 1) {
-			var rect = event.target.getBoundingClientRect();
-			var x = ~~(event.clientX - rect.left);
-			var y = ~~(event.clientY - rect.top);
+			let rect = event.target.getBoundingClientRect();
+			let x = ~~(event.clientX - rect.left);
+			let y = ~~(event.clientY - rect.top);
 			this.mouseDraw(x,y);
 		};
 
@@ -65,12 +66,12 @@ export class DrawingCanvas {
 	private onTouchstart(event:any):void {
 
 		event.preventDefault();
-		var rect = event.target.getBoundingClientRect();
-		var x = ~~(event.clientX - rect.left);
-		var y = ~~(event.clientY - rect.top);
+		let rect = event.target.getBoundingClientRect();
+		let x = ~~(event.clientX - rect.left);
+		let y = ~~(event.clientY - rect.top);
 
-		var finger = this.finger;
-		for (var i=0; i<finger.length; i++){
+		let finger = this.finger;
+		for (let i=0; i<finger.length; i++){
 			finger[i].x1 = event.touches[i].clientX - rect.left;
 			finger[i].y1 = event.touches[i].clientY - rect.top;
 		}
@@ -80,14 +81,14 @@ export class DrawingCanvas {
 	private onTouchmove(event:any):void {
 
 		event.preventDefault();
-		var rect = event.target.getBoundingClientRect();
-		var ctx  = this.ctx;
+		let rect = event.target.getBoundingClientRect();
+		let ctx  = this.ctx;
 
-		var finger = this.finger;
-		for(var i=0; i<finger.length;i++) {
+		let finger = this.finger;
+		for(let i=0; i<finger.length;i++) {
 
-			var x = event.touches[i].clientX - rect.left;
-			var y = event.touches[i].clientY - rect.top;
+			let x = event.touches[i].clientX - rect.left;
+			let y = event.touches[i].clientY - rect.top;
 
 			this.draw(finger[i].x1,finger[i].y1,x,y);
 
@@ -100,8 +101,8 @@ export class DrawingCanvas {
 
 	private mouseDraw(x:number,y:number):void {
 
-		var moveX:number = 0;
-		var moveY:number = 0;
+		let moveX:number = 0;
+		let moveY:number = 0;
 		if (this.mouseX === null || this.mouseY === null) {
 			moveX = x;
 			moveY = y;
@@ -118,10 +119,10 @@ export class DrawingCanvas {
 
 	private draw(moveX:number,moveY:number,x:number,y:number):void {
 
-		var ctx = this.ctx;
+		let ctx = this.ctx;
 
 		ctx.beginPath();
-		ctx.globalAlpha = 1;
+		ctx.globalAlpha = this.DRAW_ALPHA;
 		ctx.moveTo(moveX,moveY);
 
 		ctx.globalCompositeOperation = this.getGlobalCompositeOperation();
