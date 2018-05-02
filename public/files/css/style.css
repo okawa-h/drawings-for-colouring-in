@@ -1,0 +1,99 @@
+@import url(base.css);
+
+#all {
+	padding: 30px;
+	text-align: center;
+}
+
+/*-------------------------------------------------------------------------
+	Board
+/*-----------------------------------------------------------------------*/
+#board {
+	display: inline-block;
+	position: relative;
+	width: 800px;
+	height: 570px;
+	margin-bottom: 30px;
+	border: 2px solid #eee;
+}
+
+#board canvas {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+#board #base-canvas {
+	z-index: 1;
+}
+
+#board #color-canvas {
+	z-index: 2;
+}
+
+/*-------------------------------------------------------------------------
+	Palette
+/*-----------------------------------------------------------------------*/
+#color-palette {
+	margin-bottom: 30px;
+}
+
+#color-palette li {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	margin: 0 2px;
+	border: 3px solid transparent;
+	border-radius: 6px;
+	box-sizing: border-box;
+	cursor: pointer;
+}
+
+#color-palette li.active {
+	border-color: #bbb;
+}
+
+/*-------------------------------------------------------------------------
+	Tools
+/*-----------------------------------------------------------------------*/
+#tools li {
+	display: inline-block;
+	border-radius: 3px;
+	color: #000;
+	font-size: 14px;
+	line-height: 1;
+}
+
+#size {
+	width: 4em;
+	padding: .6em 1em;
+	border: none;
+	border-radius: 3px;
+	background-color: #eee;
+	font-size: 12px;
+}
+
+#eraser {
+	padding: .6em 1em;
+	background-color: #eee;
+	cursor: pointer;
+}
+
+#eraser.active {
+	background-color: #bbb;
+	color: #fff;
+}
+
+#clear {
+	padding: .6em 1em;
+	background-color: #eee;
+	cursor: pointer;
+}
+
+#download {
+	padding: .6em 1em;
+	background-color: #eee;
+	cursor: pointer;
+}

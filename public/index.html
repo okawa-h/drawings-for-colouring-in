@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<title>helloworld</title>
+<link rel="stylesheet" href="files/css/style.css">
+</head>
+<body>
+<div id="all">
+	<div>
+		<div id="board"></div>
+	</div>
+	<ul id="color-palette"></ul>
+	<ul id="tools">
+		<li>サイズ：<input id="size" type="number" value="" min="1" pattern="\d*" inputmode="numeric"></li>
+		<li id="eraser" data-tool="eraser">消しゴム</li>
+		<li id="clear" data-tool="clear">クリア</li>
+		<li id="download" data-tool="download">ダウンロード</li>
+	</ul>
+</div>
+<script src="files/js/jquery-3.3.1.min.js"></script>
+<script src="files/js/script.js"></script>
+</body>
+</html>
