@@ -94,22 +94,21 @@ export class DrawingColouring {
 
 	private onDownload():void {
 
-		let data  :string             = this.drawingCanvas.getData();
-		let canvas:HTMLCanvasElement  = document.createElement('canvas');
-		let ctx      = <CanvasRenderingContext2D>canvas.getContext('2d');
+		let baseData:string = this.jBaseCanvas.toDataURL();
+		let drawData:string = this.drawingCanvas.getData();
+		let canvas  :HTMLCanvasElement = document.createElement('canvas');
+		let ctx = <CanvasRenderingContext2D>canvas.getContext('2d');
 
-		canvas.width  = this.jBoard.clientWidth;
-		canvas.height = this.jBoard.clientHeight;
+		DrawingColouring.loadImage(baseData,baseImage => {
+			DrawingColouring.loadImage(drawData,drawImage => {
 
-		DrawingColouring.loadImage(this.BASE_IMAGE_PATH,image => {
+				canvas.width  = drawImage.width;
+				canvas.height = drawImage.height;
+				ctx.drawImage(baseImage, 0, 0);
+				ctx.drawImage(drawImage, 0, 0);
+				DrawingColouring.download(canvas.toDataURL(),'image.png');
 
-			ctx.drawImage(image, 0, 0);
-
-			DrawingColouring.loadImage(data,image2 => {
-				ctx.drawImage(image2, 0, 0);
-				DrawingColouring.download(canvas.toDataURL(),'sample.png');
 			});
-
 		});
 
 	}
